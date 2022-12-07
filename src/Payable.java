@@ -1,4 +1,4 @@
 public interface Payable {
-    public void payMoney(Driver driver, int priceForTrip);
-    public void payTip(Driver driver, int tipMoney); // оставить чаевые
+    void payMoney(Driver driver, int priceForTrip);
+    void payTip(Driver driver, int tipMoney); // оставить чаевые
 }

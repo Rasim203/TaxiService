@@ -16,7 +16,7 @@ public class Person {
         this.age = age;
     }
     public void setMoney(int money) {
-        if (money > 0) {
+        if (money >= 0) {
             this.money = money;
         } else {
             System.out.println("Количество денег должно быть строго больше нуля!");
@@ -35,6 +35,10 @@ public class Person {
     // public abstract void addMoney(int money);
     @Override
     public String toString() {
-        return String.format("Имя: %s\nВозраст: %d", name, age);
+        return String.format("""
+                Имя: %s
+                Возраст: %d
+                Количество денег: %d
+                """, getName(), getAge(), getMoney());
     }
 }

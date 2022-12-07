@@ -1,5 +1,4 @@
 public class Passenger extends Person implements Payable {
-    private int money;
     private Point currentLocation;
     Passenger(String name, int age, int money) {
         super(name, age, money);
@@ -10,10 +9,7 @@ public class Passenger extends Person implements Payable {
 
     //@Override
     public void addMoney(int money) { // пассажир просто добавляет себе деньги
-        this.money += money;
-    }
-    public int getMoney() {
-        return money;
+        setMoney(getMoney() + money);
     }
 
     public void setCurrentLocation(Point otherLocation) {
@@ -25,7 +21,7 @@ public class Passenger extends Person implements Payable {
     @Override
     public void payMoney(Driver driver, int priceForTrip) {
         driver.addMoney(priceForTrip);
-        money -= priceForTrip;
+        setMoney(getMoney() - priceForTrip);
     }
     @Override
     public void payTip(Driver driver, int tipMoney) {
@@ -33,6 +29,11 @@ public class Passenger extends Person implements Payable {
     }
     @Override
     public String toString() {
-        return String.format("Имя: %s\nВозраст: %d\nКоличество денег: %d", getName(), getAge(), money);
+        return String.format("""
+                Имя пассажира: %s
+                Возраст: %d
+                Количество денег: %d
+                Текущее местоположение на карте: (%d, %d)
+                """, getName(), getAge(), getMoney(), currentLocation.getX(), currentLocation.getY());
     }
 }

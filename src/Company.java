@@ -37,6 +37,9 @@ public class Company {
     public int getPricePerKilometer() {
         return pricePerKilometer;
     }
+    public int getCompanyBudget() {
+        return companyBudget;
+    }
     public void addDriver(Driver driver) {
         drivers[numberOfDrivers++] = driver;
     }
@@ -51,9 +54,10 @@ public class Company {
         return String.format("""
                         Компания "%s"
                         Бюджет компании: %d
-                        Процентная ставка за поездку водителю: %d
+                        Процентная ставка за поездку водителю: %d%%
                         Стоимость каждого километра: %d
-                        Число водителей, работающих в компании: %d""", companyName, companyBudget, percentRate,
-                pricePerKilometer, numberOfDrivers);
+                        Число водителей, работающих в компании: %d
+                        """, getCompanyName(), getCompanyBudget(), getPercentRate(),
+                getPricePerKilometer(), numberOfDrivers);
     }
 }

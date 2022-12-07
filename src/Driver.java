@@ -31,12 +31,33 @@ public class Driver extends Person implements Movable {
         taxiCompany.increaseCompanyBudget(moneyForTaxiCompany);
     }
     @Override
-    public void driveTo(Passenger passenger, Point startLocation, Point finishLocation) {
-        passenger.setCurrentLocation(finishLocation); // доставили пассажира до точки B
-        int priceForTrip = taxiCompany.calculatePriceOfTrip(startLocation, finishLocation);
-        passenger.payMoney(this, priceForTrip);
-        if (passenger.getMoney() > 1000) {
-            passenger.payTip(this, (int) (passenger.getMoney() * 0.01));
+    public void driveTo(Passenger passenger, Point finishLocation) {
+        int priceForTrip = taxiCompany.calculatePriceOfTrip(passenger.getCurrentLocation(), finishLocation);
+        if (passenger.getMoney() >= priceForTrip) {
+            passenger.setCurrentLocation(finishLocation); // доставили пассажира до точки B
+            passenger.payMoney(this, priceForTrip);
+            System.out.println("Пассажир " + passenger.getName() + " доставлен в место назначения");
+            if (passenger.getMoney() > 1000) { // если у пассажира осталось много денег, то он еще платит чаевые
+                passenger.payTip(this, (int) (passenger.getMoney() * 0.01));
+                System.out.println("Заплатил чаевые водителю");
+            }
+        } else {
+            System.out.println("У пассажира " + passenger.getName() + " недостаточно денег для поездки");
         }
+        System.out.println();
+
+
+
+
+    }
+    @Override
+    public String toString() {
+        return String.format("""
+                Имя водителя: %s
+                Возраст: %d
+                Количество денег: %d
+                Водительский стаж: %d
+                Компания такси: %s
+                """, getName(), getAge(), getMoney(), getDrivingExperience(), getTaxiCompany().getCompanyName());
     }
 }
