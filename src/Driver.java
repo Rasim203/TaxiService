@@ -1,12 +1,14 @@
 public class Driver extends Person implements Movable {
     private int drivingExperience;
     private Company taxiCompany;
+
     Driver(String name, int age, int money, int drivingExperience, Company taxiCompany) {
         super(name, age, money);
         setDrivingExperience(drivingExperience);
         setTaxiCompany(taxiCompany);
 
     }
+
     public void setDrivingExperience(int drivingExperience) {
         if (super.getAge() - 18 >= drivingExperience) {
             this.drivingExperience = drivingExperience;
@@ -14,22 +16,27 @@ public class Driver extends Person implements Movable {
             System.out.println("Вы нас обманываете. У вас не такой стаж вождения!");
         }
     }
+
     public int getDrivingExperience() {
         return drivingExperience;
     }
+
     public void setTaxiCompany(Company taxiCompany) {
         this.taxiCompany = taxiCompany;
         taxiCompany.addDriver(this);
     }
+
     public Company getTaxiCompany() {
         return taxiCompany;
     }
+
     public void addMoney(int priceForTrip) {
         int moneyForDriver = (int) ((double) taxiCompany.getPercentRate() / 100 * priceForTrip);
         int moneyForTaxiCompany = priceForTrip - moneyForDriver;
         setMoney(getMoney() + moneyForDriver);
         taxiCompany.increaseCompanyBudget(moneyForTaxiCompany);
     }
+
     @Override
     public void driveTo(Passenger passenger, Point finishLocation) {
         int priceForTrip = taxiCompany.calculatePriceOfTrip(passenger.getCurrentLocation(), finishLocation);
@@ -45,11 +52,8 @@ public class Driver extends Person implements Movable {
             System.out.println("У пассажира " + passenger.getName() + " недостаточно денег для поездки");
         }
         System.out.println();
-
-
-
-
     }
+
     @Override
     public String toString() {
         return String.format("""
