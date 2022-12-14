@@ -37,7 +37,6 @@ public class Person {
         return money;
     }
 
-    // public abstract void addMoney(int money);
     @Override
     public String toString() {
         return String.format("""

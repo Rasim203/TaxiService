@@ -9,7 +9,6 @@ public class Passenger extends Person implements Payable {
         this(name, age, 100);
     }
 
-    //@Override
     public void addMoney(int money) { // пассажир просто добавляет себе деньги
         setMoney(getMoney() + money);
     }
